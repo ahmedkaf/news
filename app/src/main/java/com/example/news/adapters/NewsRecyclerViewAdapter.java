@@ -32,7 +32,17 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     @Override
     public NewsRecyclerViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         view = LayoutInflater.from(context).inflate(R.layout.news_item, parent, false);
-        return new NewsRecyclerViewViewHolder(view);
+        NewsRecyclerViewViewHolder newsRecyclerViewViewHolder = new NewsRecyclerViewViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = newsRecyclerViewViewHolder.getBindingAdapterPosition();
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(news.get(position).getUrl()));
+                context.startActivity(intent);
+            }
+        });
+        return newsRecyclerViewViewHolder;
     }
 
     @Override
@@ -45,14 +55,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         News newsPiece = news.get(position);
         holder.textView.setText(newsPiece.getTitle());
         Glide.with(context).load(newsPiece.getUrlToImage()).into(holder.imageView);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(newsPiece.getUrl()));
-                context.startActivity(intent);
-            }
-        });
+
     }
 
      class NewsRecyclerViewViewHolder extends RecyclerView.ViewHolder{
