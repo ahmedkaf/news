@@ -6,11 +6,13 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.news.R;
+import com.example.news.WebViewActivity;
 import com.example.news.data.pojo.News;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsRecyclerViewViewHolder> {
+    private static final String NEWSURL = "newsurl";
     private Context context;
     private List<News> news;
     private View view;
@@ -37,8 +40,8 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             @Override
             public void onClick(View view) {
                 int position = newsRecyclerViewViewHolder.getBindingAdapterPosition();
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(news.get(position).getUrl()));
+                Intent intent = new Intent(context, WebViewActivity.class);
+                intent.putExtra(NEWSURL, news.get(position).getUrl());
                 context.startActivity(intent);
             }
         });
