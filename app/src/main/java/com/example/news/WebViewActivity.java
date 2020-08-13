@@ -20,7 +20,6 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
-        getSupportActionBar().hide();
         progressBar = findViewById(R.id.progressBar);
         webView = findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());

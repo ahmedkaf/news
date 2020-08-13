@@ -50,7 +50,7 @@ public class NewsFragment extends Fragment {
         String category =  getArguments().getString(categoryKey);
         newsViewModel = ViewModelProviders.of(this).get(NewsHeadLinesViewModel.class);
         newsViewModel.getAllNews(TOP_HEADLINES, COUNTRY, category, PAGE_SIZE,  API_KEY)
-                .observe(this, new Observer<Response<NewsRespond>>() {
+                .observe(getViewLifecycleOwner(), new Observer<Response<NewsRespond>>() {
                     @Override
                     public void onChanged(Response<NewsRespond> newsRespondResponse) {
                         if (newsRespondResponse == null) {
